@@ -19,7 +19,6 @@ export class AuthController {
     }
   };
 
-
   login = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.authService.login(req.body);
@@ -29,10 +28,21 @@ export class AuthController {
     }
   };
 
-
   forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.authService.forgotPassword(req.body);
+      res.status(200).send(result);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  resetPassword = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await this.authService.resetPassword(
+        req.body,
+        res.locals.user.id
+      );
       res.status(200).send(result);
     } catch (error) {
       next(error);
