@@ -3,6 +3,7 @@ import { PrismaService } from "../prisma/prisma.service";
 import { GetblogsDTO } from "./dto/get-blog.dto";
 import { Prisma } from "../../generated/prisma";
 import { skip } from "node:test";
+import { CreateBlogDTO } from "./dto/create-blog.dto";
 
 @injectable()
 export class BlogService {
@@ -39,4 +40,10 @@ export class BlogService {
       meta: { page, take, total: count },
     };
   };
+
+  createBlog = async (
+    body: CreateBlogDTO,
+    thumbnail: Express.Multer.File,
+    authUserId: number
+  ) => {};
 }
